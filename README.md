@@ -66,6 +66,17 @@ $ git checkout -b tutorial-example
 $ npm run test
 ```
 
+If you encounter Firefox binary issues, you can specify the path to your Firefox binary:
+
+``` shell
+$ FIREFOX_BINARY="/path/to/firefox" npm run test
+```
+
+Common Firefox binary locations:
+- macOS: `/Applications/Firefox.app/Contents/MacOS/firefox`
+- Windows: `C:\\Program Files\\Mozilla Firefox\\firefox.exe`
+- Linux: `/usr/bin/firefox`
+
 This will run the app's Selenium JavaScript tests, which contain calls to create Percy snapshots. The snapshots
 will then be uploaded to Percy for comparison. Percy will use the Percy token you used in **Step 2**
 to know which organization and project to upload the snapshots to.
