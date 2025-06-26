@@ -12,7 +12,7 @@
   "author": "Perceptual Inc.",
   "license": "MIT",
   "scripts": {
-    "test": "percy exec -- node tests/test.js"
+    "test": "node tests/test.js"
   },
   "devDependencies": {
     "@percy/cli": "^1.30.11",
