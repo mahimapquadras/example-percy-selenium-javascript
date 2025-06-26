@@ -5,37 +5,35 @@ on:
   push:
     branches:
       - master # Your remote default branch is 'master'
-      # - main # If you rename your remote branch to 'main' later, enable this
 
   pull_request:
     branches:
       - master # PRs targeting your 'master' branch
-      # - main # If you rename your remote branch to 'main' later, enable this
 
 jobs:
   visual-tests:
-    runs-on: ubuntu-latest # Standard runner for CI
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4 # Gets your repo's code
+      uses: actions/checkout@v4
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20' # Use a recent Node.js LTS version
+        node-version: '20'
 
     - name: Install dependencies
-      run: npm install # Installs project's npm packages
+      run: npm install
+
+    # Add this new step to install Percy CLI globally
+    - name: Install Percy CLI
+      run: npm install -g @percy/cli
 
     - name: Install latest Chromedriver (for Chrome)
-      # The example repo uses Chrome by default. Chromedriver is needed.
       run: npm install chromedriver@latest
 
     - name: Run Percy Visual Tests
       env:
-        PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }} # Uses the secret we'll set up
-        # PERCY_BRANCH and PERCY_TARGET_BRANCH are automatically handled by Percy CLI
-        # when running in a CI environment and integrated with Git.
-        # They reflect the branch of the current build and the PR's target branch.
-      run: percy exec -- npm run test # Executes the test script via Percy
+        PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      run: percy exec -- npm run test
